@@ -77,14 +77,14 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "SoulPages — Your Dreamy Digital Diary" },
+      { title: "Mind Map Media — Your Dreamy Digital Diary" },
       {
         name: "description",
         content:
-          "SoulPages is a magical pastel journaling app for self-love, gratitude, mood tracking, and memory keeping.",
+          "Mind Map Media is a magical pastel journaling app for self-love, gratitude, mood tracking, and memory keeping.",
       },
-      { name: "author", content: "SoulPages" },
-      { property: "og:title", content: "SoulPages — Your Dreamy Digital Diary" },
+      { name: "author", content: "Mind Map Media" },
+      { property: "og:title", content: "Mind Map Media — Your Dreamy Digital Diary" },
       {
         property: "og:description",
         content: "A beautiful self-care journaling experience full of pastel magic.",
