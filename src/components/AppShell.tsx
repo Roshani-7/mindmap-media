@@ -3,6 +3,7 @@ import { Link, useRouterState } from "@tanstack/react-router";
 const links = [
   { to: "/dashboard", label: "Home", icon: "🏠" },
   { to: "/journal", label: "Write", icon: "🖊️" },
+  { to: "/mind-map", label: "Map", icon: "🧠" },
   { to: "/timeline", label: "Journey", icon: "🌿" },
   { to: "/vision-board", label: "Vision", icon: "✨" },
   { to: "/letters", label: "Letters", icon: "💌" },

@@ -19,6 +19,7 @@ export const Route = createFileRoute("/")({
 });
 
 const features = [
+  { icon: "🧠", title: "Interactive Mind Map", text: "Visually connect memories, moods & themes." },
   { icon: "🌙", title: "Daily Reflections", text: "Track moods & gratitude with gentle AI prompts." },
   { icon: "💌", title: "Letters to Future You", text: "Seal a note and let time deliver it back." },
   { icon: "📌", title: "Dream Vision Board", text: "Collage your goals, Pinterest-style." },

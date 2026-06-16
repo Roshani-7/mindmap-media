@@ -12,6 +12,7 @@ import { Route as rootRouteImport } from './routes/__root'
 import { Route as VisionBoardRouteImport } from './routes/vision-board'
 import { Route as TimelineRouteImport } from './routes/timeline'
 import { Route as SitemapDotxmlRouteImport } from './routes/sitemap[.]xml'
+import { Route as MindMapRouteImport } from './routes/mind-map'
 import { Route as LettersRouteImport } from './routes/letters'
 import { Route as JournalRouteImport } from './routes/journal'
 import { Route as DashboardRouteImport } from './routes/dashboard'
@@ -31,6 +32,11 @@ const TimelineRoute = TimelineRouteImport.update({
 const SitemapDotxmlRoute = SitemapDotxmlRouteImport.update({
   id: '/sitemap.xml',
   path: '/sitemap.xml',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const MindMapRoute = MindMapRouteImport.update({
+  id: '/mind-map',
+  path: '/mind-map',
   getParentRoute: () => rootRouteImport,
 } as any)
 const LettersRoute = LettersRouteImport.update({
@@ -65,6 +71,7 @@ export interface FileRoutesByFullPath {
   '/dashboard': typeof DashboardRoute
   '/journal': typeof JournalRoute
   '/letters': typeof LettersRoute
+  '/mind-map': typeof MindMapRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/timeline': typeof TimelineRoute
   '/vision-board': typeof VisionBoardRoute
@@ -75,6 +82,7 @@ export interface FileRoutesByTo {
   '/dashboard': typeof DashboardRoute
   '/journal': typeof JournalRoute
   '/letters': typeof LettersRoute
+  '/mind-map': typeof MindMapRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/timeline': typeof TimelineRoute
   '/vision-board': typeof VisionBoardRoute
@@ -86,6 +94,7 @@ export interface FileRoutesById {
   '/dashboard': typeof DashboardRoute
   '/journal': typeof JournalRoute
   '/letters': typeof LettersRoute
+  '/mind-map': typeof MindMapRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/timeline': typeof TimelineRoute
   '/vision-board': typeof VisionBoardRoute
@@ -98,6 +107,7 @@ export interface FileRouteTypes {
     | '/dashboard'
     | '/journal'
     | '/letters'
+    | '/mind-map'
     | '/sitemap.xml'
     | '/timeline'
     | '/vision-board'
@@ -108,6 +118,7 @@ export interface FileRouteTypes {
     | '/dashboard'
     | '/journal'
     | '/letters'
+    | '/mind-map'
     | '/sitemap.xml'
     | '/timeline'
     | '/vision-board'
@@ -118,6 +129,7 @@ export interface FileRouteTypes {
     | '/dashboard'
     | '/journal'
     | '/letters'
+    | '/mind-map'
     | '/sitemap.xml'
     | '/timeline'
     | '/vision-board'
@@ -129,6 +141,7 @@ export interface RootRouteChildren {
   DashboardRoute: typeof DashboardRoute
   JournalRoute: typeof JournalRoute
   LettersRoute: typeof LettersRoute
+  MindMapRoute: typeof MindMapRoute
   SitemapDotxmlRoute: typeof SitemapDotxmlRoute
   TimelineRoute: typeof TimelineRoute
   VisionBoardRoute: typeof VisionBoardRoute
@@ -155,6 +168,13 @@ declare module '@tanstack/react-router' {
       path: '/sitemap.xml'
       fullPath: '/sitemap.xml'
       preLoaderRoute: typeof SitemapDotxmlRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/mind-map': {
+      id: '/mind-map'
+      path: '/mind-map'
+      fullPath: '/mind-map'
+      preLoaderRoute: typeof MindMapRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/letters': {
@@ -201,6 +221,7 @@ const rootRouteChildren: RootRouteChildren = {
   DashboardRoute: DashboardRoute,
   JournalRoute: JournalRoute,
   LettersRoute: LettersRoute,
+  MindMapRoute: MindMapRoute,
   SitemapDotxmlRoute: SitemapDotxmlRoute,
   TimelineRoute: TimelineRoute,
   VisionBoardRoute: VisionBoardRoute,
