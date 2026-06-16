@@ -9,12 +9,19 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as VisionBoardRouteImport } from './routes/vision-board'
 import { Route as TimelineRouteImport } from './routes/timeline'
 import { Route as LettersRouteImport } from './routes/letters'
 import { Route as JournalRouteImport } from './routes/journal'
 import { Route as DashboardRouteImport } from './routes/dashboard'
+import { Route as CapsuleRouteImport } from './routes/capsule'
 import { Route as IndexRouteImport } from './routes/index'
 
+const VisionBoardRoute = VisionBoardRouteImport.update({
+  id: '/vision-board',
+  path: '/vision-board',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const TimelineRoute = TimelineRouteImport.update({
   id: '/timeline',
   path: '/timeline',
@@ -35,6 +42,11 @@ const DashboardRoute = DashboardRouteImport.update({
   path: '/dashboard',
   getParentRoute: () => rootRouteImport,
 } as any)
+const CapsuleRoute = CapsuleRouteImport.update({
+  id: '/capsule',
+  path: '/capsule',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
@@ -43,44 +55,81 @@ const IndexRoute = IndexRouteImport.update({
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/capsule': typeof CapsuleRoute
   '/dashboard': typeof DashboardRoute
   '/journal': typeof JournalRoute
   '/letters': typeof LettersRoute
   '/timeline': typeof TimelineRoute
+  '/vision-board': typeof VisionBoardRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/capsule': typeof CapsuleRoute
   '/dashboard': typeof DashboardRoute
   '/journal': typeof JournalRoute
   '/letters': typeof LettersRoute
   '/timeline': typeof TimelineRoute
+  '/vision-board': typeof VisionBoardRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/capsule': typeof CapsuleRoute
   '/dashboard': typeof DashboardRoute
   '/journal': typeof JournalRoute
   '/letters': typeof LettersRoute
   '/timeline': typeof TimelineRoute
+  '/vision-board': typeof VisionBoardRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/dashboard' | '/journal' | '/letters' | '/timeline'
+  fullPaths:
+    | '/'
+    | '/capsule'
+    | '/dashboard'
+    | '/journal'
+    | '/letters'
+    | '/timeline'
+    | '/vision-board'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/dashboard' | '/journal' | '/letters' | '/timeline'
-  id: '__root__' | '/' | '/dashboard' | '/journal' | '/letters' | '/timeline'
+  to:
+    | '/'
+    | '/capsule'
+    | '/dashboard'
+    | '/journal'
+    | '/letters'
+    | '/timeline'
+    | '/vision-board'
+  id:
+    | '__root__'
+    | '/'
+    | '/capsule'
+    | '/dashboard'
+    | '/journal'
+    | '/letters'
+    | '/timeline'
+    | '/vision-board'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  CapsuleRoute: typeof CapsuleRoute
   DashboardRoute: typeof DashboardRoute
   JournalRoute: typeof JournalRoute
   LettersRoute: typeof LettersRoute
   TimelineRoute: typeof TimelineRoute
+  VisionBoardRoute: typeof VisionBoardRoute
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/vision-board': {
+      id: '/vision-board'
+      path: '/vision-board'
+      fullPath: '/vision-board'
+      preLoaderRoute: typeof VisionBoardRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/timeline': {
       id: '/timeline'
       path: '/timeline'
@@ -109,6 +158,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof DashboardRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/capsule': {
+      id: '/capsule'
+      path: '/capsule'
+      fullPath: '/capsule'
+      preLoaderRoute: typeof CapsuleRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/': {
       id: '/'
       path: '/'
@@ -121,10 +177,12 @@ declare module '@tanstack/react-router' {
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  CapsuleRoute: CapsuleRoute,
   DashboardRoute: DashboardRoute,
   JournalRoute: JournalRoute,
   LettersRoute: LettersRoute,
   TimelineRoute: TimelineRoute,
+  VisionBoardRoute: VisionBoardRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
