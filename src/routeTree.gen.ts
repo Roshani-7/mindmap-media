@@ -9,10 +9,22 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as TimelineRouteImport } from './routes/timeline'
+import { Route as LettersRouteImport } from './routes/letters'
 import { Route as JournalRouteImport } from './routes/journal'
 import { Route as DashboardRouteImport } from './routes/dashboard'
 import { Route as IndexRouteImport } from './routes/index'
 
+const TimelineRoute = TimelineRouteImport.update({
+  id: '/timeline',
+  path: '/timeline',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const LettersRoute = LettersRouteImport.update({
+  id: '/letters',
+  path: '/letters',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const JournalRoute = JournalRouteImport.update({
   id: '/journal',
   path: '/journal',
@@ -33,34 +45,56 @@ export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/dashboard': typeof DashboardRoute
   '/journal': typeof JournalRoute
+  '/letters': typeof LettersRoute
+  '/timeline': typeof TimelineRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/dashboard': typeof DashboardRoute
   '/journal': typeof JournalRoute
+  '/letters': typeof LettersRoute
+  '/timeline': typeof TimelineRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/dashboard': typeof DashboardRoute
   '/journal': typeof JournalRoute
+  '/letters': typeof LettersRoute
+  '/timeline': typeof TimelineRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/dashboard' | '/journal'
+  fullPaths: '/' | '/dashboard' | '/journal' | '/letters' | '/timeline'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/dashboard' | '/journal'
-  id: '__root__' | '/' | '/dashboard' | '/journal'
+  to: '/' | '/dashboard' | '/journal' | '/letters' | '/timeline'
+  id: '__root__' | '/' | '/dashboard' | '/journal' | '/letters' | '/timeline'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   DashboardRoute: typeof DashboardRoute
   JournalRoute: typeof JournalRoute
+  LettersRoute: typeof LettersRoute
+  TimelineRoute: typeof TimelineRoute
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/timeline': {
+      id: '/timeline'
+      path: '/timeline'
+      fullPath: '/timeline'
+      preLoaderRoute: typeof TimelineRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/letters': {
+      id: '/letters'
+      path: '/letters'
+      fullPath: '/letters'
+      preLoaderRoute: typeof LettersRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/journal': {
       id: '/journal'
       path: '/journal'
@@ -89,6 +123,8 @@ const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   DashboardRoute: DashboardRoute,
   JournalRoute: JournalRoute,
+  LettersRoute: LettersRoute,
+  TimelineRoute: TimelineRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
