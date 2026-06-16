@@ -6,7 +6,7 @@ import { AppShell } from "@/components/AppShell";
 export const Route = createFileRoute("/dashboard")({
   head: () => ({
     meta: [
-      { title: "Dashboard — SoulPages" },
+      { title: "Dashboard — Mind Map Media" },
       { name: "description", content: "Your daily mood, gratitude, streaks and reflections." },
     ],
   }),

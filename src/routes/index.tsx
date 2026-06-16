@@ -5,13 +5,13 @@ import { DreamBackdrop, SectionTag, Sparkle } from "@/components/Decorations";
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "SoulPages — Your Dreamy Digital Diary" },
+      { title: "Mind Map Media — Your Dreamy Digital Diary" },
       {
         name: "description",
         content:
-          "Begin your magical journaling journey with SoulPages — mood tracking, gratitude, letters to your future self, and dreamy memory keeping.",
+          "Begin your magical journaling journey with Mind Map Media — mood tracking, gratitude, letters to your future self, and dreamy memory keeping.",
       },
-      { property: "og:title", content: "SoulPages — Your Dreamy Digital Diary" },
+      { property: "og:title", content: "Mind Map Media — Your Dreamy Digital Diary" },
       { property: "og:image", content: heroImg },
     ],
   }),
@@ -36,9 +36,12 @@ function Landing() {
       <section className="relative mx-auto max-w-md px-5 pt-14 text-center">
         <div className="animate-rise">
           <p className="font-script text-3xl text-primary">✨ welcome to ✨</p>
-          <h1 className="mt-1 text-7xl leading-[0.95] text-gradient">SoulPages</h1>
-          <p className="mx-auto mt-4 max-w-xs font-sans text-base text-muted-foreground">
-            Your dreamy digital diary for self-love, reflection, and keeping the moments that matter. 💜
+          <h1 className="mt-1 text-6xl leading-[0.95] text-gradient">Mind Map Media</h1>
+          <p className="mx-auto mt-3 max-w-xs font-script text-xl text-primary">
+            Map Your Thoughts. Capture Your Journey. Grow Every Day. 💜🌙✨
+          </p>
+          <p className="mx-auto mt-3 max-w-xs font-sans text-base text-muted-foreground">
+            Your dreamy digital sanctuary for self-love, reflection, and keeping the moments that matter.
           </p>
         </div>
 
@@ -114,7 +117,7 @@ function Landing() {
             Open my diary
           </Link>
         </div>
-        <p className="mt-6 font-script text-xl text-primary">SoulPages · made with love 💜</p>
+        <p className="mt-6 font-script text-xl text-primary">Mind Map Media · made with love 💜</p>
       </section>
     </div>
   );
