@@ -9,8 +9,50 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as VisionBoardRouteImport } from './routes/vision-board'
+import { Route as TimelineRouteImport } from './routes/timeline'
+import { Route as SitemapDotxmlRouteImport } from './routes/sitemap[.]xml'
+import { Route as LettersRouteImport } from './routes/letters'
+import { Route as JournalRouteImport } from './routes/journal'
+import { Route as DashboardRouteImport } from './routes/dashboard'
+import { Route as CapsuleRouteImport } from './routes/capsule'
 import { Route as IndexRouteImport } from './routes/index'
 
+const VisionBoardRoute = VisionBoardRouteImport.update({
+  id: '/vision-board',
+  path: '/vision-board',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const TimelineRoute = TimelineRouteImport.update({
+  id: '/timeline',
+  path: '/timeline',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const SitemapDotxmlRoute = SitemapDotxmlRouteImport.update({
+  id: '/sitemap.xml',
+  path: '/sitemap.xml',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const LettersRoute = LettersRouteImport.update({
+  id: '/letters',
+  path: '/letters',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const JournalRoute = JournalRouteImport.update({
+  id: '/journal',
+  path: '/journal',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const DashboardRoute = DashboardRouteImport.update({
+  id: '/dashboard',
+  path: '/dashboard',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const CapsuleRoute = CapsuleRouteImport.update({
+  id: '/capsule',
+  path: '/capsule',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
@@ -19,28 +61,130 @@ const IndexRoute = IndexRouteImport.update({
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/capsule': typeof CapsuleRoute
+  '/dashboard': typeof DashboardRoute
+  '/journal': typeof JournalRoute
+  '/letters': typeof LettersRoute
+  '/sitemap.xml': typeof SitemapDotxmlRoute
+  '/timeline': typeof TimelineRoute
+  '/vision-board': typeof VisionBoardRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/capsule': typeof CapsuleRoute
+  '/dashboard': typeof DashboardRoute
+  '/journal': typeof JournalRoute
+  '/letters': typeof LettersRoute
+  '/sitemap.xml': typeof SitemapDotxmlRoute
+  '/timeline': typeof TimelineRoute
+  '/vision-board': typeof VisionBoardRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/capsule': typeof CapsuleRoute
+  '/dashboard': typeof DashboardRoute
+  '/journal': typeof JournalRoute
+  '/letters': typeof LettersRoute
+  '/sitemap.xml': typeof SitemapDotxmlRoute
+  '/timeline': typeof TimelineRoute
+  '/vision-board': typeof VisionBoardRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/'
+  fullPaths:
+    | '/'
+    | '/capsule'
+    | '/dashboard'
+    | '/journal'
+    | '/letters'
+    | '/sitemap.xml'
+    | '/timeline'
+    | '/vision-board'
   fileRoutesByTo: FileRoutesByTo
-  to: '/'
-  id: '__root__' | '/'
+  to:
+    | '/'
+    | '/capsule'
+    | '/dashboard'
+    | '/journal'
+    | '/letters'
+    | '/sitemap.xml'
+    | '/timeline'
+    | '/vision-board'
+  id:
+    | '__root__'
+    | '/'
+    | '/capsule'
+    | '/dashboard'
+    | '/journal'
+    | '/letters'
+    | '/sitemap.xml'
+    | '/timeline'
+    | '/vision-board'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  CapsuleRoute: typeof CapsuleRoute
+  DashboardRoute: typeof DashboardRoute
+  JournalRoute: typeof JournalRoute
+  LettersRoute: typeof LettersRoute
+  SitemapDotxmlRoute: typeof SitemapDotxmlRoute
+  TimelineRoute: typeof TimelineRoute
+  VisionBoardRoute: typeof VisionBoardRoute
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/vision-board': {
+      id: '/vision-board'
+      path: '/vision-board'
+      fullPath: '/vision-board'
+      preLoaderRoute: typeof VisionBoardRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/timeline': {
+      id: '/timeline'
+      path: '/timeline'
+      fullPath: '/timeline'
+      preLoaderRoute: typeof TimelineRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/sitemap.xml': {
+      id: '/sitemap.xml'
+      path: '/sitemap.xml'
+      fullPath: '/sitemap.xml'
+      preLoaderRoute: typeof SitemapDotxmlRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/letters': {
+      id: '/letters'
+      path: '/letters'
+      fullPath: '/letters'
+      preLoaderRoute: typeof LettersRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/journal': {
+      id: '/journal'
+      path: '/journal'
+      fullPath: '/journal'
+      preLoaderRoute: typeof JournalRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/dashboard': {
+      id: '/dashboard'
+      path: '/dashboard'
+      fullPath: '/dashboard'
+      preLoaderRoute: typeof DashboardRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/capsule': {
+      id: '/capsule'
+      path: '/capsule'
+      fullPath: '/capsule'
+      preLoaderRoute: typeof CapsuleRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/': {
       id: '/'
       path: '/'
@@ -53,17 +197,14 @@ declare module '@tanstack/react-router' {
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  CapsuleRoute: CapsuleRoute,
+  DashboardRoute: DashboardRoute,
+  JournalRoute: JournalRoute,
+  LettersRoute: LettersRoute,
+  SitemapDotxmlRoute: SitemapDotxmlRoute,
+  TimelineRoute: TimelineRoute,
+  VisionBoardRoute: VisionBoardRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
-
-import type { getRouter } from './router.tsx'
-import type { startInstance } from './start.ts'
-declare module '@tanstack/react-start' {
-  interface Register {
-    ssr: true
-    router: Awaited<ReturnType<typeof getRouter>>
-    config: Awaited<ReturnType<typeof startInstance.getOptions>>
-  }
-}
