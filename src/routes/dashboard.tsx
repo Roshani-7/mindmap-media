@@ -100,6 +100,20 @@ function Dashboard() {
             ))}
           </div>
         </section>
+
+        {/* Quick links */}
+        <section className="mt-4 grid grid-cols-2 gap-4">
+          <Link to="/capsule" className="animate-rise rounded-3xl bg-gradient-to-br from-lilac/70 to-card p-5 shadow-soft transition-transform hover:-translate-y-1">
+            <p className="text-3xl">🔮</p>
+            <p className="mt-2 text-lg font-semibold text-foreground">Memory Capsule</p>
+            <p className="text-xs text-muted-foreground">Open sealed memories</p>
+          </Link>
+          <Link to="/letters" className="animate-rise rounded-3xl bg-gradient-to-br from-blush/70 to-card p-5 shadow-soft transition-transform hover:-translate-y-1">
+            <p className="text-3xl">💌</p>
+            <p className="mt-2 text-lg font-semibold text-foreground">Future Letters</p>
+            <p className="text-xs text-muted-foreground">Write to tomorrow</p>
+          </Link>
+        </section>
       </AppShell>
     </>
   );
