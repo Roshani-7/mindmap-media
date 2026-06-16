@@ -83,7 +83,7 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
         content:
           "Mind Map Media is a magical pastel journaling app for self-love, gratitude, mood tracking, and memory keeping.",
       },
-      { name: "author", content: "Mind Map Media" },
+      { name: "author", content: "Roshani Galande" },
       { property: "og:title", content: "Mind Map Media — Your Dreamy Digital Diary" },
       {
         property: "og:description",
