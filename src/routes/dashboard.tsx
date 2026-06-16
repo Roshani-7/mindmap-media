@@ -1,4 +1,4 @@
-import { createFileRoute } from "@tanstack/react-router";
+import { createFileRoute, Link } from "@tanstack/react-router";
 import { useState } from "react";
 import { DreamBackdrop, WashiTape } from "@/components/Decorations";
 import { AppShell } from "@/components/AppShell";
