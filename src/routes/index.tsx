@@ -119,6 +119,7 @@ function Landing() {
           </Link>
         </div>
         <p className="mt-6 font-script text-xl text-primary">Mind Map Media · made with love 💜</p>
+        <p className="mt-1 font-sans text-sm text-muted-foreground">by Roshani Galande</p>
       </section>
     </div>
   );
