@@ -1,6 +1,7 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
+import { Moon } from "lucide-react";
 import heroImg from "@/assets/hero-dream.jpg";
-import { DreamBackdrop, SectionTag, Sparkle } from "@/components/Decorations";
+import { DreamBackdrop, SectionTag } from "@/components/Decorations";
 
 export const Route = createFileRoute("/")({
   head: () => ({
