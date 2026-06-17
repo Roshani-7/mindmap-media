@@ -37,7 +37,10 @@ function Landing() {
       {/* Hero */}
       <section className="relative mx-auto max-w-md px-5 pt-20 text-center">
         <div className="animate-rise rounded-[2.5rem] glass-strong px-7 py-14">
-          <span className="mx-auto grid h-16 w-16 place-items-center rounded-full bg-gradient-gold shadow-glow">
+          <span
+            className="mx-auto grid h-16 w-16 place-items-center rounded-full shadow-glow"
+            style={{ background: "var(--gradient-gold)" }}
+          >
             <Moon className="h-8 w-8 text-gold-foreground" strokeWidth={1.5} />
           </span>
 
