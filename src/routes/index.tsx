@@ -36,8 +36,9 @@ function Landing() {
       {/* Hero */}
       <section className="relative mx-auto max-w-md px-5 pt-14 text-center">
         <div className="animate-rise">
-          <p className="font-script text-3xl text-primary">✨ welcome to ✨</p>
           <h1 className="mt-1 text-6xl leading-[0.95] text-gradient">Mind Map Media</h1>
+          <p className="mt-2 font-script text-2xl text-primary">by Roshani Galande</p>
+
           <p className="mx-auto mt-3 max-w-xs font-script text-xl text-primary">
             Map Your Thoughts. Capture Your Journey. Grow Every Day. 💜🌙✨
           </p>
