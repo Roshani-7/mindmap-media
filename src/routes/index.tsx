@@ -1,6 +1,7 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
+import { Moon } from "lucide-react";
 import heroImg from "@/assets/hero-dream.jpg";
-import { DreamBackdrop, SectionTag, Sparkle } from "@/components/Decorations";
+import { DreamBackdrop, SectionTag } from "@/components/Decorations";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -34,58 +35,41 @@ function Landing() {
       <DreamBackdrop />
 
       {/* Hero */}
-      <section className="relative mx-auto max-w-md px-5 pt-14 text-center">
-        <div className="animate-rise">
-          <h1 className="mt-1 text-6xl leading-[0.95] text-gradient">Mind Map Media</h1>
-          <p className="mt-2 font-script text-2xl text-primary">by Roshani Galande</p>
+      <section className="relative mx-auto max-w-md px-5 pt-20 text-center">
+        <div className="animate-rise rounded-[2.5rem] glass-strong px-7 py-14">
+          <span
+            className="mx-auto grid h-16 w-16 place-items-center rounded-full shadow-glow"
+            style={{ background: "var(--gradient-gold)" }}
+          >
+            <Moon className="h-8 w-8 text-gold-foreground" strokeWidth={1.5} />
+          </span>
 
-          <p className="mx-auto mt-3 max-w-xs font-script text-xl text-primary">
-            Map Your Thoughts. Capture Your Journey. Grow Every Day. 💜🌙✨
-          </p>
-          <p className="mx-auto mt-3 max-w-xs font-sans text-base text-muted-foreground">
-            Your dreamy digital sanctuary for self-love, reflection, and keeping the moments that matter.
-          </p>
-        </div>
+          <h1 className="mt-7 font-display text-5xl leading-[1.05] tracking-tight text-gradient">
+            Mind Map Media
+          </h1>
 
-        <div
-          className="relative mx-auto mt-8 overflow-hidden rounded-[2rem] glass-strong p-2 animate-rise"
-          style={{ animationDelay: "0.15s" }}
-        >
-          <img
-            src={heroImg}
-            width={896}
-            height={1152}
-            alt="Dreamy pastel sky with lavender flowers, butterflies and a crescent moon"
-            className="h-72 w-full rounded-[1.6rem] object-cover"
-          />
-          <div className="absolute left-4 top-5 rotate-[-6deg] rounded-xl bg-card/80 px-3 py-1 font-script text-lg text-primary shadow-soft">
-            today is yours 🌸
-          </div>
+          <p className="mt-4 font-display text-xl italic text-foreground/80">
+            Thoughts. Stories. Growth.
+          </p>
+
+          <p className="mt-2 font-script text-lg text-primary">by Roshani Galande</p>
+
+          <Link
+            to="/journal"
+            className="mt-9 inline-block rounded-full bg-gradient-to-r from-primary to-accent-foreground px-10 py-4 text-lg font-semibold text-primary-foreground shadow-dream transition-transform hover:scale-[1.03]"
+          >
+            Start Journal
+          </Link>
         </div>
 
         <figure className="mt-7 rounded-3xl glass p-5 animate-rise" style={{ animationDelay: "0.25s" }}>
-          <Sparkle className="text-xl" />
-          <blockquote className="mt-1 font-display text-2xl italic text-foreground">
+          <blockquote className="font-display text-2xl italic text-foreground">
             “She remembered who she was, and the game changed.”
           </blockquote>
           <figcaption className="mt-2 font-script text-lg text-primary">— a little reminder</figcaption>
         </figure>
-
-        <div className="mt-8 flex flex-col gap-3 animate-rise" style={{ animationDelay: "0.35s" }}>
-          <Link
-            to="/dashboard"
-            className="rounded-full bg-gradient-to-r from-primary to-accent-foreground py-4 text-lg font-semibold text-primary-foreground shadow-dream transition-transform hover:scale-[1.03]"
-          >
-            Begin your journey ✨
-          </Link>
-          <Link
-            to="/journal"
-            className="rounded-full glass py-4 text-lg font-semibold text-primary transition-transform hover:scale-[1.03]"
-          >
-            Write your first page 🖊️
-          </Link>
-        </div>
       </section>
+
 
       {/* Features */}
       <section className="mx-auto mt-16 max-w-md px-5">

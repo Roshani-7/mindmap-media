@@ -1,27 +1,12 @@
 import React from "react";
 
-/* Floating dreamy background decorations made of emoji + glow blobs */
+/* Subtle gradient background with soft glow blobs — no emoji stickers */
 export function DreamBackdrop() {
-  const items: { e: string; cls: string; style: React.CSSProperties }[] = [
-    { e: "🦋", cls: "animate-float text-3xl", style: { top: "12%", left: "8%", ["--r" as string]: "-8deg" } },
-    { e: "🌙", cls: "animate-drift text-4xl", style: { top: "8%", right: "10%" } },
-    { e: "✨", cls: "animate-twinkle text-2xl", style: { top: "26%", right: "22%" } },
-    { e: "💜", cls: "animate-float text-2xl", style: { top: "42%", left: "6%", ["--r" as string]: "10deg" } },
-    { e: "☁️", cls: "animate-drift text-4xl opacity-70", style: { top: "58%", right: "8%" } },
-    { e: "⭐", cls: "animate-twinkle text-xl", style: { bottom: "20%", left: "16%" } },
-    { e: "🌸", cls: "animate-float text-3xl", style: { bottom: "12%", right: "14%", ["--r" as string]: "-12deg" } },
-    { e: "🎀", cls: "animate-drift text-2xl", style: { bottom: "34%", left: "4%" } },
-  ];
   return (
     <div aria-hidden className="pointer-events-none fixed inset-0 -z-10 overflow-hidden">
-      <div className="absolute -top-24 -left-24 h-72 w-72 rounded-full bg-lilac/40 blur-3xl" />
-      <div className="absolute top-1/3 -right-24 h-80 w-80 rounded-full bg-blush/40 blur-3xl" />
-      <div className="absolute bottom-0 left-1/4 h-72 w-72 rounded-full bg-accent/40 blur-3xl" />
-      {items.map((it, i) => (
-        <span key={i} className={`absolute select-none ${it.cls}`} style={it.style}>
-          {it.e}
-        </span>
-      ))}
+      <div className="absolute -top-24 -left-24 h-72 w-72 rounded-full bg-lilac/30 blur-3xl animate-drift" />
+      <div className="absolute top-1/3 -right-24 h-80 w-80 rounded-full bg-blush/30 blur-3xl animate-float" />
+      <div className="absolute bottom-0 left-1/4 h-72 w-72 rounded-full bg-accent/25 blur-3xl animate-drift" />
     </div>
   );
 }
