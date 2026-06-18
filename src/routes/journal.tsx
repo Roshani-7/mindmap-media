@@ -24,8 +24,53 @@ const backgrounds = [
 function Journal() {
   const [text, setText] = useState("");
   const [placed, setPlaced] = useState<string[]>(["🌸", "🦋"]);
+  const [photos, setPhotos] = useState<string[]>([]);
   const [bg, setBg] = useState(backgrounds[0]);
   const [mood, setMood] = useState("😌");
+  const fileRef = useRef<HTMLInputElement>(null);
+
+  // Restore any previously saved draft
+  useEffect(() => {
+    try {
+      const raw = localStorage.getItem("mmm.journal");
+      if (raw) {
+        const d = JSON.parse(raw);
+        setText(d.text ?? "");
+        setPlaced(d.placed ?? ["🌸", "🦋"]);
+        setPhotos(d.photos ?? []);
+        setMood(d.mood ?? "😌");
+        const found = backgrounds.find((b) => b.l === d.bg);
+        if (found) setBg(found);
+      }
+    } catch {
+      /* ignore corrupt draft */
+    }
+  }, []);
+
+  const handlePhoto = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (!file) return;
+    const reader = new FileReader();
+    reader.onload = () => {
+      setPhotos((p) => [...p, reader.result as string]);
+      toast.success("Photo added to your page 📷");
+    };
+    reader.readAsDataURL(file);
+    e.target.value = "";
+  };
+
+  const handleSave = () => {
+    try {
+      localStorage.setItem(
+        "mmm.journal",
+        JSON.stringify({ text, placed, photos, mood, bg: bg.l, savedAt: Date.now() }),
+      );
+      toast.success("Page saved 💾", { description: "Your entry is safely tucked away." });
+    } catch {
+      toast.error("Couldn't save this page. Please try again.");
+    }
+  };
+
 
   return (
     <>
