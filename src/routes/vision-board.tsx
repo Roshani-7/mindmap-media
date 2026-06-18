@@ -1,4 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
+import { useState } from "react";
+import { toast } from "sonner";
 import { DreamBackdrop, WashiTape } from "@/components/Decorations";
 import { AppShell } from "@/components/AppShell";
 
