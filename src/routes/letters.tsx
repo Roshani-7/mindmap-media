@@ -1,5 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useState } from "react";
+import { toast } from "sonner";
 import { DreamBackdrop } from "@/components/Decorations";
 import { AppShell } from "@/components/AppShell";
 
@@ -13,13 +14,45 @@ export const Route = createFileRoute("/letters")({
   component: Letters,
 });
 
-const pending = [
+interface PendingLetter {
+  to: string;
+  days: number;
+  preview: string;
+}
+
+const initialPending: PendingLetter[] = [
   { to: "Future me, in 1 year", days: 218, preview: "I hope you finally..." },
   { to: "Me on my birthday", days: 47, preview: "Remember how brave you were..." },
 ];
 
 function Letters() {
   const [open, setOpen] = useState(false);
+  const [body, setBody] = useState("");
+  const [deliverOn, setDeliverOn] = useState("");
+  const [pending, setPending] = useState<PendingLetter[]>(initialPending);
+
+  const handleSeal = () => {
+    if (!body.trim()) {
+      toast.error("Write a few words before sealing your letter 💌");
+      return;
+    }
+    const days = deliverOn
+      ? Math.max(0, Math.ceil((new Date(deliverOn).getTime() - Date.now()) / 86400000))
+      : 365;
+    setPending((p) => [
+      {
+        to: deliverOn ? `Future me, on ${new Date(deliverOn).toLocaleDateString()}` : "Future me, in 1 year",
+        days,
+        preview: body.trim().slice(0, 40) + (body.length > 40 ? "..." : ""),
+      },
+      ...p,
+    ]);
+    setBody("");
+    setDeliverOn("");
+    setOpen(false);
+    toast.success("Sealed & sent to the future 🔮", { description: "Time will deliver it back to you." });
+  };
+
 
   return (
     <>
@@ -42,6 +75,8 @@ function Letters() {
           <section className="mt-4 animate-rise rounded-3xl bg-gradient-to-br from-gold/30 to-card p-6 shadow-soft">
             <p className="font-script text-2xl text-foreground">Dear future me,</p>
             <textarea
+              value={body}
+              onChange={(e) => setBody(e.target.value)}
               rows={6}
               placeholder="Tell yourself what you hope, what you fear, what you love right now..."
               className="mt-3 w-full resize-none rounded-2xl border border-border bg-card/50 p-4 font-display text-lg italic text-foreground outline-none focus:ring-2 focus:ring-ring"
@@ -50,10 +85,15 @@ function Letters() {
               <label className="text-sm font-semibold text-muted-foreground">Deliver on</label>
               <input
                 type="date"
+                value={deliverOn}
+                onChange={(e) => setDeliverOn(e.target.value)}
                 className="flex-1 rounded-xl border border-border bg-card/60 px-3 py-2 text-sm outline-none focus:ring-2 focus:ring-ring"
               />
             </div>
-            <button className="mt-4 w-full rounded-full bg-gradient-to-r from-primary to-accent-foreground py-3.5 text-lg font-semibold text-primary-foreground shadow-soft transition-transform hover:scale-[1.02]">
+            <button
+              onClick={handleSeal}
+              className="mt-4 w-full rounded-full bg-gradient-to-r from-primary to-accent-foreground py-3.5 text-lg font-semibold text-primary-foreground shadow-soft transition-transform hover:scale-[1.02]"
+            >
               Seal & send to the future 🔮
             </button>
           </section>

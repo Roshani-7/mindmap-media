@@ -1,5 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useState } from "react";
+import { toast } from "sonner";
 import { DreamBackdrop } from "@/components/Decorations";
 import { AppShell } from "@/components/AppShell";
 
@@ -32,7 +33,10 @@ function Capsule() {
         <section className="animate-rise rounded-3xl bg-gradient-to-br from-primary/90 to-accent-foreground/80 p-7 text-center text-primary-foreground shadow-dream">
           <div className="text-7xl">🧰</div>
           <p className="mt-2 font-script text-2xl">3 memories sealed inside</p>
-          <button className="mt-4 rounded-full bg-card/80 px-7 py-2.5 font-semibold text-primary shadow-soft transition-transform hover:scale-105">
+          <button
+            onClick={() => toast("🪄 Memory burying ritual coming soon!", { description: "You'll be able to seal new memories here." })}
+            className="mt-4 rounded-full bg-card/80 px-7 py-2.5 font-semibold text-primary shadow-soft transition-transform hover:scale-105"
+          >
             ➕ Bury a new memory
           </button>
         </section>

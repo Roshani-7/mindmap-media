@@ -1,5 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
+import { toast } from "sonner";
 import { DreamBackdrop } from "@/components/Decorations";
 import { AppShell } from "@/components/AppShell";
 
@@ -23,8 +24,53 @@ const backgrounds = [
 function Journal() {
   const [text, setText] = useState("");
   const [placed, setPlaced] = useState<string[]>(["🌸", "🦋"]);
+  const [photos, setPhotos] = useState<string[]>([]);
   const [bg, setBg] = useState(backgrounds[0]);
   const [mood, setMood] = useState("😌");
+  const fileRef = useRef<HTMLInputElement>(null);
+
+  // Restore any previously saved draft
+  useEffect(() => {
+    try {
+      const raw = localStorage.getItem("mmm.journal");
+      if (raw) {
+        const d = JSON.parse(raw);
+        setText(d.text ?? "");
+        setPlaced(d.placed ?? ["🌸", "🦋"]);
+        setPhotos(d.photos ?? []);
+        setMood(d.mood ?? "😌");
+        const found = backgrounds.find((b) => b.l === d.bg);
+        if (found) setBg(found);
+      }
+    } catch {
+      /* ignore corrupt draft */
+    }
+  }, []);
+
+  const handlePhoto = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (!file) return;
+    const reader = new FileReader();
+    reader.onload = () => {
+      setPhotos((p) => [...p, reader.result as string]);
+      toast.success("Photo added to your page 📷");
+    };
+    reader.readAsDataURL(file);
+    e.target.value = "";
+  };
+
+  const handleSave = () => {
+    try {
+      localStorage.setItem(
+        "mmm.journal",
+        JSON.stringify({ text, placed, photos, mood, bg: bg.l, savedAt: Date.now() }),
+      );
+      toast.success("Page saved 💾", { description: "Your entry is safely tucked away." });
+    } catch {
+      toast.error("Couldn't save this page. Please try again.");
+    }
+  };
+
 
   return (
     <>
@@ -58,14 +104,47 @@ function Journal() {
               </span>
             ))}
           </div>
+          {photos.length > 0 && (
+            <div className="mt-3 grid grid-cols-3 gap-2">
+              {photos.map((src, i) => (
+                <div key={i} className="relative">
+                  <img src={src} alt="Journal memory" className="h-24 w-full rounded-2xl object-cover shadow-soft" />
+                  <button
+                    onClick={() => setPhotos((p) => p.filter((_, idx) => idx !== i))}
+                    className="absolute -right-1.5 -top-1.5 grid h-6 w-6 place-items-center rounded-full bg-card text-xs shadow-soft"
+                    aria-label="Remove photo"
+                  >
+                    ✕
+                  </button>
+                </div>
+              ))}
+            </div>
+          )}
         </section>
 
         {/* Toolbar */}
+        <input ref={fileRef} type="file" accept="image/*" className="hidden" onChange={handlePhoto} />
         <section className="mt-4 grid grid-cols-3 gap-3">
-          <button className="rounded-2xl glass py-3 text-sm font-semibold text-primary transition-transform hover:scale-105">📷 Photo</button>
-          <button className="rounded-2xl glass py-3 text-sm font-semibold text-primary transition-transform hover:scale-105">🎙️ Voice</button>
-          <button className="rounded-2xl glass py-3 text-sm font-semibold text-primary transition-transform hover:scale-105">🎨 Doodle</button>
+          <button
+            onClick={() => fileRef.current?.click()}
+            className="rounded-2xl glass py-3 text-sm font-semibold text-primary transition-transform hover:scale-105"
+          >
+            📷 Photo
+          </button>
+          <button
+            onClick={() => toast("🎙️ Voice notes are coming soon!")}
+            className="rounded-2xl glass py-3 text-sm font-semibold text-primary transition-transform hover:scale-105"
+          >
+            🎙️ Voice
+          </button>
+          <button
+            onClick={() => toast("🎨 Doodle mode is coming soon!")}
+            className="rounded-2xl glass py-3 text-sm font-semibold text-primary transition-transform hover:scale-105"
+          >
+            🎨 Doodle
+          </button>
         </section>
+
 
         {/* Backgrounds */}
         <section className="mt-4 animate-rise rounded-3xl glass p-5">
@@ -101,9 +180,13 @@ function Journal() {
           </div>
         </section>
 
-        <button className="mt-5 w-full rounded-full bg-gradient-to-r from-primary to-accent-foreground py-4 text-lg font-semibold text-primary-foreground shadow-dream transition-transform hover:scale-[1.02]">
+        <button
+          onClick={handleSave}
+          className="mt-5 w-full rounded-full bg-gradient-to-r from-primary to-accent-foreground py-4 text-lg font-semibold text-primary-foreground shadow-dream transition-transform hover:scale-[1.02]"
+        >
           Save this page 💾
         </button>
+
       </AppShell>
     </>
   );
