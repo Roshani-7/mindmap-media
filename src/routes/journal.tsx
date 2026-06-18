@@ -180,9 +180,13 @@ function Journal() {
           </div>
         </section>
 
-        <button className="mt-5 w-full rounded-full bg-gradient-to-r from-primary to-accent-foreground py-4 text-lg font-semibold text-primary-foreground shadow-dream transition-transform hover:scale-[1.02]">
+        <button
+          onClick={handleSave}
+          className="mt-5 w-full rounded-full bg-gradient-to-r from-primary to-accent-foreground py-4 text-lg font-semibold text-primary-foreground shadow-dream transition-transform hover:scale-[1.02]"
+        >
           Save this page 💾
         </button>
+
       </AppShell>
     </>
   );
