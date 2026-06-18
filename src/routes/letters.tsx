@@ -75,6 +75,8 @@ function Letters() {
           <section className="mt-4 animate-rise rounded-3xl bg-gradient-to-br from-gold/30 to-card p-6 shadow-soft">
             <p className="font-script text-2xl text-foreground">Dear future me,</p>
             <textarea
+              value={body}
+              onChange={(e) => setBody(e.target.value)}
               rows={6}
               placeholder="Tell yourself what you hope, what you fear, what you love right now..."
               className="mt-3 w-full resize-none rounded-2xl border border-border bg-card/50 p-4 font-display text-lg italic text-foreground outline-none focus:ring-2 focus:ring-ring"
@@ -83,10 +85,15 @@ function Letters() {
               <label className="text-sm font-semibold text-muted-foreground">Deliver on</label>
               <input
                 type="date"
+                value={deliverOn}
+                onChange={(e) => setDeliverOn(e.target.value)}
                 className="flex-1 rounded-xl border border-border bg-card/60 px-3 py-2 text-sm outline-none focus:ring-2 focus:ring-ring"
               />
             </div>
-            <button className="mt-4 w-full rounded-full bg-gradient-to-r from-primary to-accent-foreground py-3.5 text-lg font-semibold text-primary-foreground shadow-soft transition-transform hover:scale-[1.02]">
+            <button
+              onClick={handleSeal}
+              className="mt-4 w-full rounded-full bg-gradient-to-r from-primary to-accent-foreground py-3.5 text-lg font-semibold text-primary-foreground shadow-soft transition-transform hover:scale-[1.02]"
+            >
               Seal & send to the future 🔮
             </button>
           </section>
