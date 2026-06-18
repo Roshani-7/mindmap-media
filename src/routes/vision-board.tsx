@@ -45,6 +45,14 @@ const goals = [
 ];
 
 function VisionBoard() {
+  const [pins, setPins] = useState<Pin[]>(initialPins);
+
+  const addPin = () => {
+    const preset = pinPresets[pins.length % pinPresets.length];
+    setPins((p) => [...p, preset]);
+    toast.success("Dream pinned ✨", { description: preset.t });
+  };
+
   return (
     <>
       <DreamBackdrop />
@@ -66,9 +74,13 @@ function VisionBoard() {
           ))}
         </div>
 
-        <button className="my-4 w-full rounded-full glass py-3.5 font-semibold text-primary transition-transform hover:scale-[1.02]">
+        <button
+          onClick={addPin}
+          className="my-4 w-full rounded-full glass py-3.5 font-semibold text-primary transition-transform hover:scale-[1.02]"
+        >
           ➕ Add a dream pin
         </button>
+
 
         {/* Goal tracking */}
         <section className="animate-rise rounded-3xl glass-strong p-5">
