@@ -104,14 +104,47 @@ function Journal() {
               </span>
             ))}
           </div>
+          {photos.length > 0 && (
+            <div className="mt-3 grid grid-cols-3 gap-2">
+              {photos.map((src, i) => (
+                <div key={i} className="relative">
+                  <img src={src} alt="Journal memory" className="h-24 w-full rounded-2xl object-cover shadow-soft" />
+                  <button
+                    onClick={() => setPhotos((p) => p.filter((_, idx) => idx !== i))}
+                    className="absolute -right-1.5 -top-1.5 grid h-6 w-6 place-items-center rounded-full bg-card text-xs shadow-soft"
+                    aria-label="Remove photo"
+                  >
+                    ✕
+                  </button>
+                </div>
+              ))}
+            </div>
+          )}
         </section>
 
         {/* Toolbar */}
+        <input ref={fileRef} type="file" accept="image/*" className="hidden" onChange={handlePhoto} />
         <section className="mt-4 grid grid-cols-3 gap-3">
-          <button className="rounded-2xl glass py-3 text-sm font-semibold text-primary transition-transform hover:scale-105">📷 Photo</button>
-          <button className="rounded-2xl glass py-3 text-sm font-semibold text-primary transition-transform hover:scale-105">🎙️ Voice</button>
-          <button className="rounded-2xl glass py-3 text-sm font-semibold text-primary transition-transform hover:scale-105">🎨 Doodle</button>
+          <button
+            onClick={() => fileRef.current?.click()}
+            className="rounded-2xl glass py-3 text-sm font-semibold text-primary transition-transform hover:scale-105"
+          >
+            📷 Photo
+          </button>
+          <button
+            onClick={() => toast("🎙️ Voice notes are coming soon!")}
+            className="rounded-2xl glass py-3 text-sm font-semibold text-primary transition-transform hover:scale-105"
+          >
+            🎙️ Voice
+          </button>
+          <button
+            onClick={() => toast("🎨 Doodle mode is coming soon!")}
+            className="rounded-2xl glass py-3 text-sm font-semibold text-primary transition-transform hover:scale-105"
+          >
+            🎨 Doodle
+          </button>
         </section>
+
 
         {/* Backgrounds */}
         <section className="mt-4 animate-rise rounded-3xl glass p-5">
