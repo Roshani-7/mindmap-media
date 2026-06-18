@@ -27,6 +27,32 @@ const initialPending: PendingLetter[] = [
 
 function Letters() {
   const [open, setOpen] = useState(false);
+  const [body, setBody] = useState("");
+  const [deliverOn, setDeliverOn] = useState("");
+  const [pending, setPending] = useState<PendingLetter[]>(initialPending);
+
+  const handleSeal = () => {
+    if (!body.trim()) {
+      toast.error("Write a few words before sealing your letter 💌");
+      return;
+    }
+    const days = deliverOn
+      ? Math.max(0, Math.ceil((new Date(deliverOn).getTime() - Date.now()) / 86400000))
+      : 365;
+    setPending((p) => [
+      {
+        to: deliverOn ? `Future me, on ${new Date(deliverOn).toLocaleDateString()}` : "Future me, in 1 year",
+        days,
+        preview: body.trim().slice(0, 40) + (body.length > 40 ? "..." : ""),
+      },
+      ...p,
+    ]);
+    setBody("");
+    setDeliverOn("");
+    setOpen(false);
+    toast.success("Sealed & sent to the future 🔮", { description: "Time will deliver it back to you." });
+  };
+
 
   return (
     <>
