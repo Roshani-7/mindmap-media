@@ -14,7 +14,13 @@ export const Route = createFileRoute("/letters")({
   component: Letters,
 });
 
-const pending = [
+interface PendingLetter {
+  to: string;
+  days: number;
+  preview: string;
+}
+
+const initialPending: PendingLetter[] = [
   { to: "Future me, in 1 year", days: 218, preview: "I hope you finally..." },
   { to: "Me on my birthday", days: 47, preview: "Remember how brave you were..." },
 ];
