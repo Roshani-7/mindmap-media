@@ -14,13 +14,28 @@ export const Route = createFileRoute("/vision-board")({
   component: VisionBoard,
 });
 
-const pins = [
+interface Pin {
+  h: string;
+  e: string;
+  t: string;
+  c: string;
+}
+
+const initialPins: Pin[] = [
   { h: "h-40", e: "🏖️", t: "Slow travel by the sea", c: "from-accent/60 to-card" },
   { h: "h-28", e: "📚", t: "Read 24 books", c: "from-lilac/60 to-card" },
   { h: "h-36", e: "🧘‍♀️", t: "Morning yoga ritual", c: "from-blush/60 to-card" },
   { h: "h-44", e: "🏡", t: "A cozy creative home", c: "from-gold/40 to-card" },
   { h: "h-32", e: "🌻", t: "Grow a flower garden", c: "from-lilac/50 to-card" },
   { h: "h-40", e: "💍", t: "Love that feels like home", c: "from-blush/70 to-card" },
+];
+
+const pinPresets: Pin[] = [
+  { h: "h-36", e: "✈️", t: "See the northern lights", c: "from-accent/60 to-card" },
+  { h: "h-32", e: "🎨", t: "Sell my first painting", c: "from-lilac/60 to-card" },
+  { h: "h-40", e: "🌊", t: "Learn to surf", c: "from-blush/60 to-card" },
+  { h: "h-28", e: "📝", t: "Write a little book", c: "from-gold/40 to-card" },
+  { h: "h-36", e: "🎻", t: "Play an instrument", c: "from-lilac/50 to-card" },
 ];
 
 const goals = [
