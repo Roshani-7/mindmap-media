@@ -39,7 +39,7 @@ function Letters() {
         </section>
 
         {open && (
-          <section className="mt-4 animate-rise rounded-3xl bg-[oklch(0.98_0.02_85)] p-6 shadow-soft">
+          <section className="mt-4 animate-rise rounded-3xl bg-gradient-to-br from-gold/30 to-card p-6 shadow-soft">
             <p className="font-script text-2xl text-foreground">Dear future me,</p>
             <textarea
               rows={6}
