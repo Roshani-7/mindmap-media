@@ -84,9 +84,12 @@ function Dashboard() {
           <p className="mt-2 font-display text-2xl italic text-foreground">
             “What is one small thing that made you smile today, and why did it matter?”
           </p>
-          <button className="mt-4 rounded-full bg-gradient-to-r from-primary to-accent-foreground px-6 py-2.5 font-semibold text-primary-foreground shadow-soft transition-transform hover:scale-105">
+          <Link
+            to="/journal"
+            className="mt-4 inline-block rounded-full bg-gradient-to-r from-primary to-accent-foreground px-6 py-2.5 font-semibold text-primary-foreground shadow-soft transition-transform hover:scale-105"
+          >
             Reflect now ✍️
-          </button>
+          </Link>
         </section>
 
         {/* Badges */}
