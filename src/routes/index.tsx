@@ -1,5 +1,5 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { Moon } from "lucide-react";
+
 import heroImg from "@/assets/hero-dream.jpg";
 import { DreamBackdrop, SectionTag } from "@/components/Decorations";
 
