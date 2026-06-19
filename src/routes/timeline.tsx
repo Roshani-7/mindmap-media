@@ -5,7 +5,7 @@ import { AppShell } from "@/components/AppShell";
 export const Route = createFileRoute("/timeline")({
   head: () => ({
     meta: [
-      { title: "Life Journey — Mind Map Media" },
+      { title: "Life Journey — The MindMap Media" },
       { name: "description", content: "An interactive timeline of your milestones and growth." },
     ],
   }),

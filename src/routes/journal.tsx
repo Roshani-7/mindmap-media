@@ -7,7 +7,7 @@ import { AppShell } from "@/components/AppShell";
 export const Route = createFileRoute("/journal")({
   head: () => ({
     meta: [
-      { title: "Write — Mind Map Media" },
+      { title: "Write — The MindMap Media" },
       { name: "description", content: "Your dreamy journaling space with stickers, moods and photos." },
     ],
   }),

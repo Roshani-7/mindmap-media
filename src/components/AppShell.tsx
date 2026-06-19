@@ -46,7 +46,7 @@ export function AppShell({
   return (
     <div className="relative mx-auto min-h-screen w-full max-w-md px-4 pb-28 pt-8">
       <header className="mb-6 animate-rise">
-        <p className="font-script text-2xl text-primary">{emoji} Mind Map Media</p>
+        <p className="font-script text-2xl text-primary">{emoji} The MindMap Media</p>
         <h1 className="mt-1 text-4xl text-gradient">{title}</h1>
       </header>
       {children}
