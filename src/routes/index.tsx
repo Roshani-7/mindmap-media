@@ -6,13 +6,13 @@ import { DreamBackdrop, SectionTag } from "@/components/Decorations";
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "Mind Map Media — Your Dreamy Digital Diary" },
+      { title: "The MindMap Media — Your Dreamy Digital Diary" },
       {
         name: "description",
         content:
-          "Begin your magical journaling journey with Mind Map Media — mood tracking, gratitude, letters to your future self, and dreamy memory keeping.",
+          "Begin your magical journaling journey with The MindMap Media — mood tracking, gratitude, letters to your future self, and dreamy memory keeping.",
       },
-      { property: "og:title", content: "Mind Map Media — Your Dreamy Digital Diary" },
+      { property: "og:title", content: "The MindMap Media — Your Dreamy Digital Diary" },
       { property: "og:image", content: heroImg },
     ],
   }),
@@ -38,7 +38,7 @@ function Landing() {
       <section className="relative mx-auto max-w-md px-5 pt-20 text-center">
         <div className="animate-rise rounded-[2.5rem] glass-strong px-7 py-14">
           <h1 className="font-display text-5xl leading-[1.05] tracking-tight text-gradient">
-            Mind Map Media
+            The MindMap Media
           </h1>
 
           <p className="mt-4 font-display text-xl italic text-foreground/80">
@@ -96,7 +96,7 @@ function Landing() {
             Open my diary
           </Link>
         </div>
-        <p className="mt-6 font-script text-xl text-primary">Mind Map Media · made with love 💜</p>
+        <p className="mt-6 font-script text-xl text-primary">The MindMap Media · made with love 💜</p>
         <p className="mt-1 font-sans text-sm text-muted-foreground">by Roshani Galande</p>
       </section>
     </div>

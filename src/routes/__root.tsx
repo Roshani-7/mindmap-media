@@ -78,14 +78,14 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "Mind Map Media — Your Dreamy Digital Diary" },
+      { title: "The MindMap Media — Your Dreamy Digital Diary" },
       {
         name: "description",
         content:
-          "Mind Map Media is a magical pastel journaling app for self-love, gratitude, mood tracking, and memory keeping.",
+          "The MindMap Media is a magical pastel journaling app for self-love, gratitude, mood tracking, and memory keeping.",
       },
       { name: "author", content: "Roshani Galande" },
-      { property: "og:title", content: "Mind Map Media — Your Dreamy Digital Diary" },
+      { property: "og:title", content: "The MindMap Media — Your Dreamy Digital Diary" },
       {
         property: "og:description",
         content: "A beautiful self-care journaling experience full of pastel magic.",

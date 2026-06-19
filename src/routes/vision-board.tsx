@@ -7,7 +7,7 @@ import { AppShell } from "@/components/AppShell";
 export const Route = createFileRoute("/vision-board")({
   head: () => ({
     meta: [
-      { title: "Vision Board — Mind Map Media" },
+      { title: "Vision Board — The MindMap Media" },
       { name: "description", content: "A Pinterest-style dream collage of your goals and inspiration." },
     ],
   }),
