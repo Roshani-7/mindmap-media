@@ -1,5 +1,5 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { Moon } from "lucide-react";
+
 import heroImg from "@/assets/hero-dream.jpg";
 import { DreamBackdrop, SectionTag } from "@/components/Decorations";
 
@@ -37,14 +37,7 @@ function Landing() {
       {/* Hero */}
       <section className="relative mx-auto max-w-md px-5 pt-20 text-center">
         <div className="animate-rise rounded-[2.5rem] glass-strong px-7 py-14">
-          <span
-            className="mx-auto grid h-16 w-16 place-items-center rounded-full shadow-glow"
-            style={{ background: "var(--gradient-gold)" }}
-          >
-            <Moon className="h-8 w-8 text-gold-foreground" strokeWidth={1.5} />
-          </span>
-
-          <h1 className="mt-7 font-display text-5xl leading-[1.05] tracking-tight text-gradient">
+          <h1 className="font-display text-5xl leading-[1.05] tracking-tight text-gradient">
             Mind Map Media
           </h1>
 
