@@ -20,14 +20,22 @@ const ROUTES = [
  */
 function trackErrors(page: Page) {
   const errors: string[] = [];
+  // Network 404s for optional assets (favicons, og images, etc.) are not
+  // JavaScript runtime errors, so ignore that specific console noise.
+  const isResourceNoise = (text: string) =>
+    /Failed to load resource/i.test(text) && /404|status of 4\d\d/i.test(text);
   page.on("console", (msg: ConsoleMessage) => {
-    if (msg.type() === "error") errors.push(`console.error: ${msg.text()}`);
+    if (msg.type() !== "error") return;
+    const text = msg.text();
+    if (isResourceNoise(text)) return;
+    errors.push(`console.error: ${text}`);
   });
   page.on("pageerror", (err) => {
     errors.push(`pageerror: ${err.message}`);
   });
   return () => errors;
 }
+
 
 for (const route of ROUTES) {
   test(`route "${route}" renders without runtime errors`, async ({ page }) => {
