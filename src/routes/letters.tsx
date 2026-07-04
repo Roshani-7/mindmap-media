@@ -15,14 +15,15 @@ export const Route = createFileRoute("/letters")({
 });
 
 interface PendingLetter {
+  id: string;
   to: string;
   days: number;
   preview: string;
 }
 
 const initialPending: PendingLetter[] = [
-  { to: "Future me, in 1 year", days: 218, preview: "I hope you finally..." },
-  { to: "Me on my birthday", days: 47, preview: "Remember how brave you were..." },
+  { id: "seed-1", to: "Future me, in 1 year", days: 218, preview: "I hope you finally..." },
+  { id: "seed-2", to: "Me on my birthday", days: 47, preview: "Remember how brave you were..." },
 ];
 
 function Letters() {
