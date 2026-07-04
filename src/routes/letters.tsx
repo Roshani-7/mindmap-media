@@ -15,14 +15,15 @@ export const Route = createFileRoute("/letters")({
 });
 
 interface PendingLetter {
+  id: string;
   to: string;
   days: number;
   preview: string;
 }
 
 const initialPending: PendingLetter[] = [
-  { to: "Future me, in 1 year", days: 218, preview: "I hope you finally..." },
-  { to: "Me on my birthday", days: 47, preview: "Remember how brave you were..." },
+  { id: "seed-1", to: "Future me, in 1 year", days: 218, preview: "I hope you finally..." },
+  { id: "seed-2", to: "Me on my birthday", days: 47, preview: "Remember how brave you were..." },
 ];
 
 function Letters() {
@@ -41,6 +42,7 @@ function Letters() {
       : 365;
     setPending((p) => [
       {
+        id: `letter-${Date.now()}`,
         to: deliverOn ? `Future me, on ${new Date(deliverOn).toLocaleDateString()}` : "Future me, in 1 year",
         days,
         preview: body.trim().slice(0, 40) + (body.length > 40 ? "..." : ""),
@@ -104,7 +106,7 @@ function Letters() {
           <h2 className="text-2xl">On their way ✨</h2>
           <div className="mt-3 space-y-3">
             {pending.map((p) => (
-              <div key={p.to} className="animate-rise rounded-3xl glass p-5">
+              <div key={p.id} className="animate-rise rounded-3xl glass p-5">
                 <div className="flex items-center justify-between">
                   <p className="font-script text-xl text-primary">{p.to}</p>
                   <span className="text-2xl">💌</span>
