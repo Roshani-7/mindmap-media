@@ -106,7 +106,7 @@ function Letters() {
           <h2 className="text-2xl">On their way ✨</h2>
           <div className="mt-3 space-y-3">
             {pending.map((p) => (
-              <div key={p.to} className="animate-rise rounded-3xl glass p-5">
+              <div key={p.id} className="animate-rise rounded-3xl glass p-5">
                 <div className="flex items-center justify-between">
                   <p className="font-script text-xl text-primary">{p.to}</p>
                   <span className="text-2xl">💌</span>
