@@ -42,7 +42,7 @@ function trackErrors(page: Page) {
 }
 
 
-for (const route of ROUTES) {
+for (const { path: route, minButtons } of ROUTES) {
   test(`route "${route}" renders without runtime errors`, async ({ page }) => {
     const getErrors = trackErrors(page);
     const response = await page.goto(route, { waitUntil: "networkidle" });
@@ -80,9 +80,35 @@ for (const route of ROUTES) {
     }
 
     expect(getErrors(), `${route} should have no runtime errors after clicks`).toEqual([]);
-    // Sanity: home has no buttons, every other page should have at least one.
-    if (route !== "/") {
-      expect(clicked, `${route} should expose at least one clickable button`).toBeGreaterThan(0);
+    expect(
+      clicked,
+      `${route} should expose at least ${minButtons} clickable button(s)`,
+    ).toBeGreaterThanOrEqual(minButtons);
+  });
+}
+
+// The Letters page uses a clickable envelope (not a <button>) to reveal its
+// composer, which then exposes real buttons. Exercise that full flow.
+test('letters envelope opens and its buttons work without runtime errors', async ({ page }) => {
+  const getErrors = trackErrors(page);
+  await page.goto("/letters", { waitUntil: "networkidle" });
+
+  await page.getByText("tap to open a new letter").click();
+  await page.getByRole("textbox").first().fill("Dear future me, this is a test note.");
+
+  const buttons = page.locator("button:visible:not([disabled])");
+  const count = await buttons.count();
+  expect(count, "letters composer should reveal at least one button").toBeGreaterThan(0);
+  for (let i = 0; i < count; i++) {
+    try {
+      await buttons.nth(i).click({ timeout: 1500 });
+    } catch {
+      /* re-render is fine */
     }
+  }
+
+  expect(getErrors(), "letters flow should have no runtime errors").toEqual([]);
+});
+
   });
 }
