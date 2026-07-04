@@ -42,6 +42,7 @@ function Letters() {
       : 365;
     setPending((p) => [
       {
+        id: `letter-${Date.now()}`,
         to: deliverOn ? `Future me, on ${new Date(deliverOn).toLocaleDateString()}` : "Future me, in 1 year",
         days,
         preview: body.trim().slice(0, 40) + (body.length > 40 ? "..." : ""),
