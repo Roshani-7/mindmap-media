@@ -1,18 +1,23 @@
 import { test, expect, type ConsoleMessage, type Page } from "@playwright/test";
 
 /**
- * Every user-facing route in the app. Keep in sync with src/routes/.
+ * Every user-facing route in the app plus how many `<button>` elements we
+ * expect to be clickable on initial render. Routes whose primary controls are
+ * non-<button> elements (e.g. Timeline is read-only, Letters uses a clickable
+ * envelope) declare a minimum of 0 and are exercised separately below.
+ * Keep in sync with src/routes/.
  */
-const ROUTES = [
-  "/",
-  "/dashboard",
-  "/journal",
-  "/mind-map",
-  "/timeline",
-  "/vision-board",
-  "/letters",
-  "/capsule",
-] as const;
+const ROUTES: { path: string; minButtons: number }[] = [
+  { path: "/", minButtons: 0 },
+  { path: "/dashboard", minButtons: 1 },
+  { path: "/journal", minButtons: 1 },
+  { path: "/mind-map", minButtons: 1 },
+  { path: "/timeline", minButtons: 0 },
+  { path: "/vision-board", minButtons: 1 },
+  { path: "/letters", minButtons: 0 },
+  { path: "/capsule", minButtons: 1 },
+];
+
 
 /**
  * Attach console-error and pageerror listeners and return a getter for any
