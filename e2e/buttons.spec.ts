@@ -110,5 +110,3 @@ test('letters envelope opens and its buttons work without runtime errors', async
   expect(getErrors(), "letters flow should have no runtime errors").toEqual([]);
 });
 
-  });
-}
