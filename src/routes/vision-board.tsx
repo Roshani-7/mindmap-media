@@ -3,6 +3,8 @@ import { useState } from "react";
 import { toast } from "sonner";
 import { DreamBackdrop, WashiTape } from "@/components/Decorations";
 import { AppShell } from "@/components/AppShell";
+import { getDreamPinIdeas } from "@/lib/api/vision-ai.functions";
+import type { DreamPinIdea } from "@/lib/ai/vision-ideas.server";
 
 export const Route = createFileRoute("/vision-board")({
   head: () => ({
@@ -44,13 +46,48 @@ const goals = [
   { t: "Learn watercolor", p: 30 },
 ];
 
+const ideaColors = [
+  "from-accent/60 to-card",
+  "from-lilac/60 to-card",
+  "from-blush/60 to-card",
+  "from-gold/40 to-card",
+  "from-lilac/50 to-card",
+];
+
 function VisionBoard() {
   const [pins, setPins] = useState<Pin[]>(initialPins);
+  const [ideas, setIdeas] = useState<DreamPinIdea[] | null>(null);
+  const [loadingIdeas, setLoadingIdeas] = useState(false);
 
   const addPin = () => {
     const preset = pinPresets[pins.length % pinPresets.length];
     setPins((p) => [...p, preset]);
     toast.success("Dream pinned ✨", { description: preset.t });
+  };
+
+  const fetchIdeas = async () => {
+    if (loadingIdeas) return;
+    setLoadingIdeas(true);
+    try {
+      const result = await getDreamPinIdeas({
+        data: { pins: pins.map((p) => p.t), goals: goals.map((g) => g.t) },
+      });
+      setIdeas(result);
+      toast.success("Fresh dream ideas ✨", { description: "Tap Pin on any idea you love." });
+    } catch (err) {
+      toast.error(err instanceof Error ? err.message : "Something dreamy went wrong — try again 💜");
+    } finally {
+      setLoadingIdeas(false);
+    }
+  };
+
+  const pinIdea = (idea: DreamPinIdea) => {
+    setPins((p) => [
+      ...p,
+      { h: "h-32", e: idea.emoji, t: idea.text, c: ideaColors[p.length % ideaColors.length] },
+    ]);
+    setIdeas((list) => (list ? list.filter((i) => i.text !== idea.text) : list));
+    toast.success("Dream pinned ✨", { description: idea.text });
   };
 
   return (
@@ -75,8 +112,39 @@ function VisionBoard() {
         </div>
 
         <button
+          onClick={fetchIdeas}
+          disabled={loadingIdeas}
+          className="my-4 w-full rounded-full bg-gradient-to-r from-primary to-accent-foreground py-3.5 text-lg font-semibold text-primary-foreground shadow-soft transition-transform hover:scale-[1.02] disabled:opacity-60"
+        >
+          {loadingIdeas ? "Dreaming up ideas… ✨" : "✨ Ask AI for dream ideas"}
+        </button>
+
+        {ideas && ideas.length > 0 && (
+          <section className="animate-rise rounded-3xl glass-strong p-5">
+            <h2 className="text-2xl">AI dream ideas 💫</h2>
+            <div className="mt-3 space-y-2">
+              {ideas.map((idea) => (
+                <div key={idea.text} className="flex items-center gap-3 rounded-2xl bg-card/60 p-3">
+                  <span className="text-2xl">{idea.emoji}</span>
+                  <div className="min-w-0 flex-1">
+                    <p className="font-display text-lg leading-tight text-foreground">{idea.text}</p>
+                    <p className="text-xs font-semibold text-muted-foreground">{idea.category}</p>
+                  </div>
+                  <button
+                    onClick={() => pinIdea(idea)}
+                    className="shrink-0 rounded-full bg-gradient-to-r from-gold/80 to-blush/70 px-4 py-2 text-sm font-bold text-gold-foreground shadow-sm transition-transform hover:scale-105"
+                  >
+                    Pin ✨
+                  </button>
+                </div>
+              ))}
+            </div>
+          </section>
+        )}
+
+        <button
           onClick={addPin}
-          className="my-4 w-full rounded-full glass py-3.5 font-semibold text-primary transition-transform hover:scale-[1.02]"
+          className="mt-4 w-full rounded-full glass py-3.5 font-semibold text-primary transition-transform hover:scale-[1.02]"
         >
           ➕ Add a dream pin
         </button>
